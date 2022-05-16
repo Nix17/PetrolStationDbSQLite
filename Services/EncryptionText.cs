@@ -30,7 +30,6 @@ namespace PetrolStationDB.Services
 
         public void Dispose()
         {
-            throw new NotImplementedException();
         }
     }
 }

@@ -8,7 +8,6 @@ namespace PetrolStationDB.Services.Interfaces
 {
     public interface IBackupDatabase : IDisposable
     {
-        bool BackupMySqlDbToDesktop(string _connectingString);
         bool BackupSQLiteDbToDesktop(string _path);
     }
 }

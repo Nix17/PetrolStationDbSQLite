@@ -32,10 +32,4 @@ namespace PetrolStationDB.Database.Models
         public Guid PetrolStationId { get; set; }
         public PetrolStation PetrolStation { get; set; }
     }
-
-/*    [NotMapped]
-    public class EmployeeResource : Employee
-    {
-        public int NumberStation { get; set; }
-    }*/
 }

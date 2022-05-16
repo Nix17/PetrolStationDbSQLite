@@ -9,11 +9,7 @@ Required packages
 
 "Microsoft.EntityFrameworkCore.Sqlite" Version="6.0.5"
 
-"Pomelo.EntityFrameworkCore.MySql" Version="6.0.1"
-
-"MySql.Data" Version="8.0.29"
-
-"MySqlBackup.NET" Version="2.3.6.1"
+ Microsoft.EntityFrameworkCore.Sqlite.Core" Version="6.0.5"
 
 "DocXCore" Version="1.0.9"
 

@@ -22,7 +22,6 @@ namespace PetrolStationDB.Database.Base
         [Column("created_at", Order = 102)]
         public DateTime CreatedDate { get; set; } = DateTime.Now;
 
-        /*TypeName = "timestamp without time zone", */
         [Column("updated_at", Order = 104)]
         public DateTime UpdatedDate { get; set; } = DateTime.Now;
     }

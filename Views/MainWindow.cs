@@ -304,16 +304,6 @@ namespace PetrolStationDB.Views
                     {
                         MessageBox.Show("Не получилось создать бэкап!!", "Error!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
-
-                    // MySQL
-                    /*if (backupMySqlDatabase.BackupMySqlDbToDesktop("server=localhost;user=root;pwd=;database=petrol_station;"))
-                    {
-                        MessageBox.Show("Бэкап БД успешно сделан. Файл на рабочем столе.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Не получилось создать бэкап!!", "Error!!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }*/
                 }
             }catch(Exception ex)
             {

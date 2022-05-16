@@ -20,17 +20,10 @@ namespace PetrolStationDB.Database
 
         public _ContextDb()
         {
-            //Database.EnsureDeleted();
             Database.EnsureCreated();
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            //MySQL
-            /*optionsBuilder.UseMySql(
-                "server=localhost;user=root;password=;database=petrol_station;",
-                new MySqlServerVersion(new Version(10, 4, 24))
-            );*/
-
             //SQLite
             optionsBuilder.UseSqlite("Data Source=sqlite_petrol_station.db");
         }
