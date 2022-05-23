@@ -12,6 +12,7 @@ namespace PetrolStationDB.Controllers
 {
     public class ProfileController
     {
+        SettingsDatabase settingsDb = new SettingsDatabase();
         public bool ChangePassword(ref User _user, string newPass)
         {
             bool result = false;
@@ -23,7 +24,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     user = db.Users.FirstOrDefault(u => u.Id == guid);
                     if (user != null)
@@ -55,7 +56,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     users = db.Users.ToList();
                 }

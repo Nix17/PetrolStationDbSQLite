@@ -12,13 +12,14 @@ namespace PetrolStationDB.Controllers
 {
     public class EquipmentController
     {
+        SettingsDatabase settingsDb = new SettingsDatabase();
         public List<Equipment> GetEquipmentsByFilters(string search = "", string field = "")
         {
             List<Equipment> equipments = null;
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     if (search == "")
                     {
@@ -72,7 +73,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using(_ContextDb db = new _ContextDb())
+                using(_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     Equipment item = db.Equipments.FirstOrDefault(eq => eq.Id == _guid);
                     if(item != null)
@@ -101,7 +102,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using(_ContextDb db = new _ContextDb())
+                using(_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     Equipment item = db.Equipments.FirstOrDefault(eq => eq.Id == _guid);
                     if(item != null)
@@ -126,7 +127,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using(_ContextDb db = new _ContextDb())
+                using(_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     result = db.Equipments.Max(eq => eq.InventoryNumber);
                 }
@@ -144,7 +145,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     _item.Id = Guid.NewGuid();
                     _item.CreatedBy = _user;
@@ -171,7 +172,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using(_ContextDb db = new _ContextDb())
+                using(_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     equipment = db.Equipments.FirstOrDefault(eq => eq.Id == _guid);
                 }
@@ -189,7 +190,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     results = db.Equipments.Where(eq => eq.StructureId == _guid).ToList();
                 }

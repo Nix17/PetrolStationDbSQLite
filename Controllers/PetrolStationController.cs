@@ -12,13 +12,14 @@ namespace PetrolStationDB.Controllers
 {
     public class PetrolStationController
     {
+        SettingsDatabase settingsDb = new SettingsDatabase();
         public List<PetrolStationType> GetAllTypes(string search = "")
         {
             List<PetrolStationType> result = null;
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     if (search == "")
                     {
@@ -45,7 +46,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using(_ContextDb db = new _ContextDb())
+                using(_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     PetrolStationType type = db.PetrolStationTypes.FirstOrDefault(x => x.Id == _guid);
                     if(type != null)
@@ -67,7 +68,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     if (db.PetrolStations.ToList().Count > 0)
                     {
@@ -94,7 +95,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     PetrolStation ps = new PetrolStation
                     {
@@ -127,7 +128,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     ps = db.PetrolStations.Single(p => p.Id == _id);
                 }
@@ -146,7 +147,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     if(search == "")
                     {
@@ -202,7 +203,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     PetrolStation item = db.PetrolStations.FirstOrDefault(ps => ps.Id == _guid);
 
@@ -227,7 +228,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using(_ContextDb db = new _ContextDb())
+                using(_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     var list =
                         db.Structures

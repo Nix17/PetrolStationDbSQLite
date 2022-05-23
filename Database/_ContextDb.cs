@@ -18,14 +18,10 @@ namespace PetrolStationDB.Database
         public DbSet<Employee> Employees { get; set; }
         public DbSet<MaterialLiability> MaterialLiabilitys { get; set; }
 
-        public _ContextDb()
+        public _ContextDb(DbContextOptions<_ContextDb> options) : base(options)
         {
+            //Проверка существования БД
             Database.EnsureCreated();
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            //SQLite
-            optionsBuilder.UseSqlite("Data Source=sqlite_petrol_station.db");
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

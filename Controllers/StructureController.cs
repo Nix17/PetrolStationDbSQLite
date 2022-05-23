@@ -12,13 +12,14 @@ namespace PetrolStationDB.Controllers
 {
     public class StructureController
     {
+        SettingsDatabase settingsDb = new SettingsDatabase();
         public List<Structure> GetAllStructuresWithFilter(string search = "", string field = "")
         {
             List<Structure> structuresList = null;
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     if (search == "")
                     {
@@ -72,7 +73,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using(_ContextDb db = new _ContextDb())
+                using(_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     count = db.Equipments.Count(eq => eq.StructureId == _guid);
                 }
@@ -90,7 +91,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using(_ContextDb db = new _ContextDb())
+                using(_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     Structure item = db.Structures.FirstOrDefault(st => st.Id == _guid);
                     if (item != null)
@@ -119,7 +120,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using(_ContextDb db = new _ContextDb())
+                using(_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     Structure item = db.Structures.FirstOrDefault(st => st.Id == _guid);
 
@@ -144,7 +145,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     Guid _guid = Guid.NewGuid();
                     Structure item = new Structure
@@ -177,7 +178,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     structure = db.Structures.FirstOrDefault(x => x.Id == _guid);
                     return structure;
@@ -196,7 +197,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using(_ContextDb db = new _ContextDb())
+                using(_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     var structures = db.Structures.Where(x => x.PetrolStationId == _guid).ToList();
 

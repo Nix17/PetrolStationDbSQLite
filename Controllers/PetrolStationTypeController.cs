@@ -12,13 +12,14 @@ namespace PetrolStationDB.Controllers
 {
     public class PetrolStationTypeController
     {
+        SettingsDatabase settingsDb = new SettingsDatabase();
         public List<PetrolStationType> GetAllTypes(string search = "", string field = "")
         {
             List<PetrolStationType> result = null;
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     if (search == "")
                     {
@@ -76,7 +77,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     psType = db.PetrolStationTypes.FirstOrDefault(ps => ps.Id == _id);
                     if (psType != null)
@@ -106,7 +107,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     psType = db.PetrolStationTypes.FirstOrDefault(ps => ps.Id == _id);
                     if (psType != null)
@@ -132,7 +133,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     PetrolStationType psType = new PetrolStationType
                     {
@@ -150,7 +151,7 @@ namespace PetrolStationDB.Controllers
                     db.SaveChanges();
                 }
 
-                using (var db = new _ContextDb())
+                using (var db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     if (db.PetrolStationTypes.Any(ps => ps.Id == guid)) { isAdd = true; }
                 }

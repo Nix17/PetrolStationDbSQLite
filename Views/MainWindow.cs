@@ -234,26 +234,34 @@ namespace PetrolStationDB.Views
 
         private void dataPsGV_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            if(e.ColumnIndex == 4)
+            try
             {
-                Guid _guid = (Guid)dataPsGV[0, e.RowIndex].Value;
-                string _psName = dataPsGV[1, e.RowIndex].Value + "; " + dataPsGV[2, e.RowIndex].Value;
-                ListEquipmentFromPS listForm = new ListEquipmentFromPS(_guid, _psName);
-                listForm.Show();
-            }else if(e.ColumnIndex == 9)
-            {
-                string message = "Вы действительно хотите удалить АЗС?";
-                if (MessageBox.Show(message, "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (e.ColumnIndex == 4)
                 {
-                    if (DeletePetrolStation(e))
+                    Guid _guid = (Guid)dataPsGV[0, e.RowIndex].Value;
+                    string _psName = dataPsGV[1, e.RowIndex].Value + "; " + dataPsGV[2, e.RowIndex].Value;
+                    ListEquipmentFromPS listForm = new ListEquipmentFromPS(_guid, _psName);
+                    listForm.Show();
+                }
+                else if (e.ColumnIndex == 9)
+                {
+                    string message = "Вы действительно хотите удалить АЗС?";
+                    if (MessageBox.Show(message, "Warning!", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        MessageBox.Show("АЗС была успешно удалена.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Произошла ошибка при удалении данных!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        if (DeletePetrolStation(e))
+                        {
+                            MessageBox.Show("АЗС была успешно удалена.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        else
+                        {
+                            MessageBox.Show("Произошла ошибка при удалении данных!", "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Error!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -296,7 +304,7 @@ namespace PetrolStationDB.Views
                 {
                     // SQLite
 
-                    if (backupMySqlDatabase.BackupSQLiteDbToDesktop("sqlite_petrol_station"))
+                    if (backupMySqlDatabase.BackupSQLiteDbToDesktop())
                     {
                         MessageBox.Show("Бэкап БД успешно сделан. Файл на рабочем столе.", "Info", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }

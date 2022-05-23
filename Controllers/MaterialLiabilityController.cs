@@ -12,13 +12,14 @@ namespace PetrolStationDB.Controllers
 {
     public class MaterialLiabilityController
     {
+        SettingsDatabase settingsDb = new SettingsDatabase();
         public List<MaterialLiability> GetMaterialLiabilities()
         {
             List<MaterialLiability> materialLiabilities = null;
 
             try
             {
-                using(_ContextDb db = new _ContextDb())
+                using(_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     materialLiabilities = db.MaterialLiabilitys.ToList();
                 }
@@ -36,7 +37,7 @@ namespace PetrolStationDB.Controllers
 
             try
             { 
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     item.Id = Guid.NewGuid();
                     item.CreatedBy = _user;
@@ -61,7 +62,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using(_ContextDb db = new _ContextDb())
+                using(_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     MaterialLiability item = db.MaterialLiabilitys.FirstOrDefault(x => x.Id == _guid);
                     if(item != null)
@@ -85,7 +86,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     var list = db.MaterialLiabilitys.Where(x => x.EmployeeId == _employeeId).ToList();
                     if(list != null && list.Count > 0)

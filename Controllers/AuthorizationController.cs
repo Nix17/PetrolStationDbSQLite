@@ -12,6 +12,7 @@ namespace PetrolStationDB.Controllers
 {
     public class AuthorizationController
     {
+        SettingsDatabase settingsDb = new SettingsDatabase();
         public User AuthToApp(string _login, string _pass)
         {
             User user = null;
@@ -19,7 +20,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     var res = db.Users.FirstOrDefault(x => x.Login == _login && x.Password == et.ComputeSha256Hash(_pass));
                     if (res != null) user = res;

@@ -1,5 +1,6 @@
 using PetrolStationDB.Database;
 using PetrolStationDB.Views.ExportToWordView;
+using PetrolStationDB.Services;
 
 namespace PetrolStationDB
 {
@@ -11,8 +12,9 @@ namespace PetrolStationDB
         [STAThread]
         static void Main()
         {
+            SettingsDatabase settingsDb = new SettingsDatabase();
             // Начальная инициализация БД
-            using (_ContextDb db = new _ContextDb())
+            using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
             {
                 DatabaseInitializer dbIni = new DatabaseInitializer(db);
                 dbIni.MySeed();

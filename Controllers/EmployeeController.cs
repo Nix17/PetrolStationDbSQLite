@@ -12,13 +12,14 @@ namespace PetrolStationDB.Controllers
 {
     public class EmployeeController
     {
+        SettingsDatabase settingsDb = new SettingsDatabase();
         public List<Employee> GetEmployees(string search = "", string field = "")
         {
             List<Employee> employees = null;
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     if (search == "")
                     {
@@ -90,7 +91,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     employee = db.Employees.FirstOrDefault(e => e.Id == _guid);
                     if (employee != null)
@@ -124,7 +125,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     employee = db.Employees.FirstOrDefault(e => e.Id == _guid);
 
@@ -156,13 +157,13 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     db.Employees.Add(_employee);
                     db.SaveChanges();
                 }
 
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     if (db.Employees.Any(e => e.Id == guid))
                     {
@@ -184,7 +185,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using (_ContextDb db = new _ContextDb())
+                using (_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     if (db.Employees.ToList().Count > 0)
                     {
@@ -206,7 +207,7 @@ namespace PetrolStationDB.Controllers
 
             try
             {
-                using(_ContextDb db = new _ContextDb())
+                using(_ContextDb db = new _ContextDb(settingsDb.GetDbContextOptions()))
                 {
                     employee = db.Employees.FirstOrDefault(e => e.Id == _guid);
                 }
